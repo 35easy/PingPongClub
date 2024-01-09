@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1020</width>
+    <height>688</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,14 +20,14 @@
       <item>
        <widget class="QPushButton" name="pushButton">
         <property name="text">
-         <string>PushButton</string>
+         <string>人员管理</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="btTournament">
         <property name="text">
-         <string>PushButton</string>
+         <string>赛事管理</string>
         </property>
        </widget>
       </item>
@@ -49,8 +49,8 @@
        <widget class="QTextBrowser" name="textBrowser">
         <property name="geometry">
          <rect>
-          <x>100</x>
-          <y>190</y>
+          <x>220</x>
+          <y>230</y>
           <width>461</width>
           <height>121</height>
          </rect>
@@ -74,7 +74,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>1020</width>
      <height>26</height>
     </rect>
    </property>

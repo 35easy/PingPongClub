@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <tournament.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,7 +16,13 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_btTournament_clicked();
+
+    void on_btTournament_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
+    Tournament *tournament;
 };
 #endif // MAINWINDOW_H
