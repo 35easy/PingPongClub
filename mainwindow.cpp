@@ -6,8 +6,10 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    tournament=new Tournament();
-    ui->stackedWidget->addWidget(tournament);
+    tournamentSystem=new TournamentSystem();
+    ui->stackedWidget->addWidget(tournamentSystem);
+    ui->stackedWidget->setCurrentIndex(2);
+
 }
 
 MainWindow::~MainWindow()
@@ -18,6 +20,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btTournament_clicked(bool checked)
 {
-
     ui->stackedWidget->setCurrentIndex(1);
+
 }

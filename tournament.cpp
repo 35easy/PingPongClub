@@ -1,41 +1,16 @@
 #include "tournament.h"
-#include "ui_tournament.h"
 
-Tournament::Tournament(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::Tournament)
-{
-    ui->setupUi(this);
+Tournament::Tournament(int id, const QString& name, const QDate& date)
+    : id(id), name(name), date(date) {}
+
+int Tournament::getId() const {
+    return id;
 }
 
-Tournament::~Tournament()
-{
-    delete ui;
+QString Tournament::getName() const {
+    return name;
 }
 
-void Tournament::on_btPlayer_clicked()
-{
-    ui->tabWidget->setCurrentIndex(1);
-}
-
-void Tournament::on_btSeedPlayer_clicked()
-{
-    ui->tabWidget->setCurrentIndex(2);
-
-}
-
-void Tournament::on_btYes_clicked()
-{
-
-}
-
-void Tournament::on_btFixture_clicked()
-{
-
-}
-
-void Tournament::on_btHome_clicked()
-{
-    ui->tabWidget->setCurrentIndex(0);
-
+QDate Tournament::getDate() const {
+    return date;
 }

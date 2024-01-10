@@ -1,33 +1,22 @@
+
 #ifndef TOURNAMENT_H
 #define TOURNAMENT_H
 
-#include <QWidget>
+#include <QString>
+#include <QDate>
 
-namespace Ui {
-class Tournament;
-}
-
-class Tournament : public QWidget
-{
-    Q_OBJECT
-
+class Tournament {
 public:
-    explicit Tournament(QWidget *parent = nullptr);
-    ~Tournament();
+    Tournament(int id, const QString& name, const QDate& date);
 
-private slots:
-    void on_btPlayer_clicked();
-
-    void on_btSeedPlayer_clicked();
-
-    void on_btYes_clicked();
-
-    void on_btFixture_clicked();
-
-    void on_btHome_clicked();
+    int getId() const;
+    QString getName() const;
+    QDate getDate() const;
 
 private:
-    Ui::Tournament *ui;
+    int id;
+    QString name;
+    QDate date;
 };
 
 #endif // TOURNAMENT_H

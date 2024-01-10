@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <tournament.h>
+#include <tournamentSystem.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,12 +17,10 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_btTournament_clicked();
-
     void on_btTournament_clicked(bool checked);
 
 private:
     Ui::MainWindow *ui;
-    Tournament *tournament;
+    TournamentSystem *tournamentSystem;
 };
 #endif // MAINWINDOW_H
