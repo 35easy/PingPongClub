@@ -17,8 +17,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_btTournament_clicked();
-
     void on_btTournament_clicked(bool checked);
 
 private:

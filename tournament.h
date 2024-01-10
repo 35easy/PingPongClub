@@ -24,8 +24,6 @@ private slots:
 
     void on_btFixture_clicked();
 
-    void on_btHome_clicked();
-
 private:
     Ui::Tournament *ui;
 };
