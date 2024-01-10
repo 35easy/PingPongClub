@@ -52,7 +52,7 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <widget class="QLineEdit" name="lineEdit"/>
+            <widget class="QLineEdit" name="editName"/>
            </item>
            <item row="1" column="0">
             <spacer name="verticalSpacer">
@@ -75,7 +75,7 @@
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="QLabel" name="label_2">
+            <widget class="QLabel" name="playerSum">
              <property name="text">
               <string>0</string>
              </property>
@@ -102,7 +102,7 @@
             </widget>
            </item>
            <item row="4" column="1">
-            <widget class="QLabel" name="label_5">
+            <widget class="QLabel" name="seedPlayerSum">
              <property name="text">
               <string>0</string>
              </property>
@@ -129,7 +129,7 @@
             </widget>
            </item>
            <item row="6" column="1">
-            <widget class="QDateEdit" name="dateEdit"/>
+            <widget class="QDateEdit" name="editDate"/>
            </item>
            <item row="7" column="0">
             <spacer name="verticalSpacer_4">
@@ -154,7 +154,7 @@
            <item row="8" column="1">
             <layout class="QHBoxLayout" name="horizontalLayout_4">
              <item>
-              <widget class="QRadioButton" name="radioButton_2">
+              <widget class="QRadioButton" name="radioElimination">
                <property name="text">
                 <string>淘汰赛</string>
                </property>
@@ -164,7 +164,7 @@
               </widget>
              </item>
              <item>
-              <widget class="QRadioButton" name="radioButton">
+              <widget class="QRadioButton" name="radioGroup">
                <property name="text">
                 <string>小组赛</string>
                </property>
@@ -196,7 +196,7 @@
             </widget>
            </item>
            <item row="10" column="1">
-            <widget class="QSpinBox" name="spinBox"/>
+            <widget class="QSpinBox" name="editGroupCount"/>
            </item>
            <item row="11" column="0">
             <spacer name="verticalSpacer_6">
@@ -219,7 +219,7 @@
             </widget>
            </item>
            <item row="12" column="1">
-            <widget class="QLabel" name="label_10">
+            <widget class="QLabel" name="groupPlayerSum">
              <property name="text">
               <string>输入小组赛组数确定小组人数</string>
              </property>
@@ -264,7 +264,7 @@
           </spacer>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_8">
+          <widget class="QPushButton" name="btYes">
            <property name="sizePolicy">
             <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
              <horstretch>0</horstretch>
@@ -304,30 +304,37 @@
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout_3">
          <item>
-          <widget class="QPushButton" name="pushButton_4">
+          <widget class="QPushButton" name="btAddFilePlayer">
            <property name="text">
             <string>从文件中增加 </string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="QPushButton" name="btAddOnePlayer">
            <property name="text">
             <string>单个增加</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_6">
+          <widget class="QPushButton" name="btDeletPlayer">
            <property name="text">
             <string> 删除选手</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_7">
+          <widget class="QPushButton" name="btFindPlayer">
            <property name="text">
             <string>查询选手</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="btUpdatePlayer">
+           <property name="text">
+            <string> 修改信息</string>
            </property>
           </widget>
          </item>
@@ -355,32 +362,6 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <spacer name="horizontalSpacer_5">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>40</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QPushButton" name="pushButton">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="text">
-        <string>参赛选手管理</string>
-       </property>
-      </widget>
-     </item>
-     <item>
       <spacer name="horizontalSpacer">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -394,7 +375,53 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="btHome">
+       <property name="text">
+        <string>首页</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="HSpacer5">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btPlayer">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>参赛选手管理</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="HSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QPushButton" name="btSeedPlayer">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -407,7 +434,7 @@
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_2">
+      <spacer name="HSpacer2">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -429,7 +456,7 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="btFixture">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
          <horstretch>0</horstretch>
@@ -442,7 +469,7 @@
       </widget>
      </item>
      <item>
-      <spacer name="horizontalSpacer_4">
+      <spacer name="horizontalSpacer_2">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
