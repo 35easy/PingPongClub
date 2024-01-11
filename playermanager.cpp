@@ -93,5 +93,4 @@ void PlayerManager::on_btClearPlayer_clicked()
 {
 
     DataBase::getInstance().clearPlayer();
-
 }

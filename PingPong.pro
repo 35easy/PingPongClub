@@ -16,19 +16,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     database.cpp \
+    fixture.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp \
     playermanager.cpp \
-    tournament.cpp \
     tournamentSystem.cpp
 
 HEADERS += \
     database.h \
+    fixture.h \
     mainwindow.h \
     player.h \
     playermanager.h \
-    tournament.h \
     tournamentSystem.h
 
 FORMS += \
