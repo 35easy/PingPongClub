@@ -29,6 +29,9 @@ public:
     // 更新选手信息
     bool updatePlayer(int playerId, const QString &name, int seed);
 
+signals:
+    void gotoFixturemanager();
+
 private slots:
     void on_btAddAPlayer_clicked();
 
@@ -38,6 +41,8 @@ private slots:
     void on_btAddFilePlayer_clicked();
 
     void on_btClearPlayer_clicked();
+
+    void on_btPlayerOK_clicked();
 
 private:
     Ui::PlayerManager *ui;

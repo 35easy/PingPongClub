@@ -56,8 +56,6 @@ void PlayerManager::on_BTBoxAddPlayer_accepted()
 ui->stackedWidget->setCurrentIndex(0);
 }
 
-
-
 void PlayerManager::on_btAddFilePlayer_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, "选择文件", "../", "文本文件 (*.xlsx);;所有文件 (*.*)");
@@ -93,4 +91,9 @@ void PlayerManager::on_btClearPlayer_clicked()
 {
 
     DataBase::getInstance().clearPlayer();
+}
+
+void PlayerManager::on_btPlayerOK_clicked()
+{
+    gotoFixturemanager();
 }

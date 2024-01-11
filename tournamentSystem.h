@@ -2,6 +2,7 @@
 #define TOURNAMENTSYSTEM_H
 
 #include "playermanager.h"
+#include "fixturemanager.h"
 #include <QWidget>
 
 namespace Ui {
@@ -20,17 +21,13 @@ private slots:
     void on_btPlayer_clicked();
 
     void on_btSeedPlayer_clicked();
-
-    void on_btYes_clicked();
-
     void on_btFixture_clicked();
-
-    void on_btCreateFixture_clicked();
 
 
 private:
     Ui::TournamentSystem *ui;
     PlayerManager* playerManager;
+    FixtureManager* fixtureManager;
 
 };
 

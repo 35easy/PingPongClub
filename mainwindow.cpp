@@ -20,6 +20,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btTournament_clicked(bool checked)
 {
-    ui->stackedWidget->setCurrentIndex(1);
+    ui->stackedWidget->setCurrentIndex(2);
 
 }

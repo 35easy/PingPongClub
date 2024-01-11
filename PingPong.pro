@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     database.cpp \
     fixture.cpp \
+    fixturemanager.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp \
@@ -26,12 +27,14 @@ SOURCES += \
 HEADERS += \
     database.h \
     fixture.h \
+    fixturemanager.h \
     mainwindow.h \
     player.h \
     playermanager.h \
     tournamentSystem.h
 
 FORMS += \
+    fixturemanager.ui \
     mainwindow.ui \
     palyermanager.ui \
     tournamentSystem.ui
