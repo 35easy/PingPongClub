@@ -37,6 +37,8 @@ private slots:
 
     void on_btAddFilePlayer_clicked();
 
+    void on_btClearPlayer_clicked();
+
 private:
     Ui::PlayerManager *ui;
 //    QSqlTableModel *playersModel;

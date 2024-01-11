@@ -7,7 +7,6 @@ PlayerManager::PlayerManager(QWidget *parent)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
-
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 //    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
 
@@ -71,7 +70,6 @@ void PlayerManager::on_btAddFilePlayer_clicked()
         return;
     }
 
-
     if(!xlsx->load())
         qDebug()<<"excel打开失败";
     //处理表格除去前面的无用项
@@ -82,35 +80,18 @@ void PlayerManager::on_btAddFilePlayer_clicked()
 
     QString id,name,sex;
     for (;row<rowSum;row++) {
-//        id=xlsx->read(row,0).toString();
-        name=xlsx->read(row,1).toString();
-        sex=xlsx->read(row,2).toString();
+//        id=xlsx->read(row,1).toString();
+        name=xlsx->read(row,2).toString();
+        sex=xlsx->read(row,3).toString();
         DataBase::getInstance().insertPlayer(Player(name,sex));
         qDebug()<<id<<name<<sex;
     }
 
+}
 
-    //插入方法
-//    QString insertItem;
-//    for (auto iter=header.begin();iter!=header.end();iter++) {
-//        insertItem+=iter;
-//        insertItem.append(',');
-//    }
-//    insertItem.chop(1);
+void PlayerManager::on_btClearPlayer_clicked()
+{
 
-//    QString insertPre= "insert into player("+insertItem+")";
-
-//    QString insertValue;
-//    for (int i=row+1;i<=rowCount;i++) {
-//        insertValue="values(";
-//        for(int j=1;j<=colCount;j++)
-//            insertValue+="'"+xlsx->read(i,j).toString()+"',";
-//        insertValue.chop(1);
-//        insertValue.append(')');
-
-//        if(!query->exec(insertPre+insertValue))
-//            qDebug() <<"can't not insert table:"<< query->lastError().text();
-//    }
-
+    DataBase::getInstance().clearPlayer();
 
 }

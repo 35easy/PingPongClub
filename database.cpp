@@ -67,7 +67,21 @@ bool DataBase::submitPlayer()
 
 }
 
-
+void DataBase::clearPlayer()
+{
+   playerTabModel->removeRows(0,playerTabModel->rowCount());
+   if(playerTabModel->submitAll()){
+       qDebug() << "删除成功!";
+   }else {
+       qDebug() << "删除失败:" << playerTabModel->lastError().text();
+   }
+//    QSqlQuery query;
+//   if (query.exec("DELETE FROM player;")) {
+//       qDebug() << "Player table records deleted successfully.";
+//   } else {
+//       qDebug() << "Failed to delete records from Player table:" << query.lastError().text();
+//   }
+}
 
 
 bool DataBase::openConnection() {
@@ -108,17 +122,40 @@ bool DataBase::createTables() {
 }
 
 bool DataBase::insertPlayer(const Player& player) {
-    // 插入选手数据的代码，根据需要修改
-    QSqlQuery query;
-    query.prepare("INSERT INTO player (name, sex) VALUES (?, ?)");
-    query.addBindValue(player.getName());
-    query.addBindValue(player.getGender());
+    // 假设 model 是一个已经与 player 表关联的 QSqlTableModel 对象
+    QSqlRecord record = playerTabModel->record();
 
-    if (!query.exec()) {
-        qDebug() << "Insert Player Error: " << query.lastError().text();
+    // 在 model 中插入一行新的记录
+//    playerTabModel->insertRow(-1);
+    int row=playerTabModel->rowCount();
+    playerTabModel->insertRecord(-1, record);
+
+    // 设置新插入行的数据
+    playerTabModel->setData(playerTabModel->index(row, 1), player.getName()); // 假设 name 列是第一列
+    playerTabModel->setData(playerTabModel->index(row, 2), player.getGender()); // 假设 gender 列是第二列
+
+    // 提交修改到数据库
+    if (!playerTabModel->submitAll()) {
+        qDebug() << "Insert Player Error: " << playerTabModel->lastError().text();
+        playerTabModel->revertAll(); // 如果提交失败，回滚修改
         return false;
     }
+
     return true;
+
+
+
+// 插入选手数据的代码，根据需要修改
+//    QSqlQuery query;
+//    query.prepare("INSERT INTO player (name, sex) VALUES (?, ?)");
+//    query.addBindValue(player.getName());
+//    query.addBindValue(player.getGender());
+
+//    if (!query.exec()) {
+//        qDebug() << "Insert Player Error: " << query.lastError().text();
+//        return false;
+//    }
+//    return true;
 }
 
 bool DataBase::updatePlayer(const Player& player) {

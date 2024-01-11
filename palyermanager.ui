@@ -62,7 +62,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_2">
+          <widget class="QPushButton" name="btClearPlayer">
            <property name="text">
             <string>从数据库清空</string>
            </property>

@@ -22,6 +22,9 @@ public:
     void initDataBase();
     bool initPlayerModel();
     bool submitPlayer();
+    void clearPlayer();
+
+
 
     bool openConnection();
     void closeConnection();
