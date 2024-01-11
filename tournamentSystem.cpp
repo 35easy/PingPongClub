@@ -13,16 +13,13 @@ TournamentSystem::TournamentSystem(QWidget *parent) :
     ui->tabWidget->setCurrentWidget(fixtureManager);
 
     connect(fixtureManager,&FixtureManager::gotoPlayerManager,this,&TournamentSystem::on_btPlayer_clicked);
+
 }
 
 TournamentSystem::~TournamentSystem()
 {
     delete ui;
 }
-
-
-
-
 
 void TournamentSystem::on_btPlayer_clicked()
 {
@@ -31,7 +28,6 @@ void TournamentSystem::on_btPlayer_clicked()
     if(playerManager!=NULL){
         return;
         ui->tabWidget->setCurrentWidget(playerManager);
-
     }
     playerManager=new PlayerManager();
     ui->tabWidget->addTab(playerManager,"参赛选手管理");
@@ -50,5 +46,10 @@ void TournamentSystem::on_btFixture_clicked()
 {
     qDebug()<<"导入";
     ui->tabWidget->setCurrentWidget(fixtureManager);
+
+}
+
+void TournamentSystem::GenerateElimination()
+{
 
 }

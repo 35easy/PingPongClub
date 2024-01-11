@@ -22,8 +22,7 @@ private slots:
 
     void on_btSeedPlayer_clicked();
     void on_btFixture_clicked();
-
-
+    void GenerateElimination();
 private:
     Ui::TournamentSystem *ui;
     PlayerManager* playerManager;

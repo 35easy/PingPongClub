@@ -189,12 +189,12 @@ bool DataBase::deletePlayer(int playerId) {
 QVector<Player> DataBase::getAllPlayers() {
     // 获取所有选手数据的代码，根据需要修改
     QVector<Player> players;
-    QSqlQuery query("SELECT id, name, gender FROM players");
+    QSqlQuery query("SELECT id, name, sex FROM player");
     while (query.next()) {
         int id = query.value(0).toInt();
         QString name = query.value(1).toString();
-        QString gender = query.value(2).toString();
-        players.append(Player(id, name, gender));
+        QString sex = query.value(2).toString();
+        players.append(Player(id, name, sex));
     }
     return players;
 }

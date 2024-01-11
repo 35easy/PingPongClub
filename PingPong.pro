@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     database.cpp \
+    eliminationnode.cpp \
+    eliminationtree.cpp \
     fixture.cpp \
     fixturemanager.cpp \
     main.cpp \
@@ -26,6 +28,8 @@ SOURCES += \
 
 HEADERS += \
     database.h \
+    eliminationnode.h \
+    eliminationtree.h \
     fixture.h \
     fixturemanager.h \
     mainwindow.h \
@@ -34,6 +38,8 @@ HEADERS += \
     tournamentSystem.h
 
 FORMS += \
+    eliminationnode.ui \
+    eliminationtree.ui \
     fixturemanager.ui \
     mainwindow.ui \
     palyermanager.ui \
