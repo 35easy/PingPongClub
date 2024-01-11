@@ -201,7 +201,7 @@
          <item row="4" column="1">
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QRadioButton" name="radioEliminationNode">
+            <widget class="QRadioButton" name="radioElimination">
              <property name="text">
               <string>淘汰赛</string>
              </property>
@@ -211,6 +211,9 @@
             <widget class="QRadioButton" name="radioGroup">
              <property name="text">
               <string>小组赛</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>

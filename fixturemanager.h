@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "eliminationtree.h"
 #include "database.h"
+#include "grouplist.h"
 namespace Ui {
 class FixtureManager;
 }
@@ -15,7 +16,8 @@ class FixtureManager : public QWidget
 public:
     explicit FixtureManager(QWidget *parent = nullptr);
     ~FixtureManager();
-
+    void EliminationStart(QVector<Player*>& players);
+    void GroupStart(QVector<Player*>& players);
 
 signals:
     void gotoPlayerManager();
@@ -31,6 +33,7 @@ private slots:
 private:
     Ui::FixtureManager *ui;
     EliminationTree *eTree;
+    GroupList *gList;
 };
 
 #endif // FIXTUREMANAGER_H

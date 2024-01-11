@@ -20,6 +20,8 @@ SOURCES += \
     eliminationtree.cpp \
     fixture.cpp \
     fixturemanager.cpp \
+    grouplist.cpp \
+    groupnode.cpp \
     main.cpp \
     mainwindow.cpp \
     player.cpp \
@@ -32,6 +34,8 @@ HEADERS += \
     eliminationtree.h \
     fixture.h \
     fixturemanager.h \
+    grouplist.h \
+    groupnode.h \
     mainwindow.h \
     player.h \
     playermanager.h \
@@ -41,6 +45,8 @@ FORMS += \
     eliminationnode.ui \
     eliminationtree.ui \
     fixturemanager.ui \
+    grouplist.ui \
+    groupnode.ui \
     mainwindow.ui \
     palyermanager.ui \
     tournamentSystem.ui
