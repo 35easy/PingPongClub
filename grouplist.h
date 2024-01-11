@@ -19,12 +19,13 @@ public:
     explicit GroupList(QWidget *parent = nullptr);
     ~GroupList();
     QGridLayout *pLayout;
-    void init(int count,int contain);
+    void init(int count,int contain,int winSize);
     void GenerateList(QVector<Player*>& players);
 private:
     Ui::GroupList *ui;
     int groupCount;
     int contain;
+    int winSize;
     QVector<GroupNode*>list;
 };
 

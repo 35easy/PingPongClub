@@ -30,7 +30,7 @@ void FixtureManager::EliminationStart(QVector<Player*>& players)
 void FixtureManager::GroupStart(QVector<Player*> &players)
 {
     gList=new GroupList();
-    gList->init(4,4);
+    gList->init(4,4,2);
     gList->GenerateList(players);
     gList->show();
 

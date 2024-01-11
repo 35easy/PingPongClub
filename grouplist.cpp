@@ -17,17 +17,18 @@ GroupList::~GroupList()
     delete ui;
 }
 
-void GroupList::init(int count,int contain)
+void GroupList::init(int count,int contain,int winSize)
 {
     groupCount=count;
     this->contain=contain;
+    this->winSize=winSize;
 }
 
 void GroupList::GenerateList(QVector<Player*>& players)
 {
     GroupNode* node;
     for (int i=0;i<groupCount;i++) {
-        node=new GroupNode(contain);
+        node=new GroupNode(contain,winSize);
         node->setPlayers(players.mid(i * contain, contain));
         list.push_back(node);
         pLayout->addWidget(node);

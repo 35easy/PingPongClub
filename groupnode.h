@@ -4,7 +4,8 @@
 #include "player.h"
 
 #include <QWidget>
-
+#include <QDebug>
+#include <QTableWidget>
 namespace Ui {
 class GroupNode;
 }
@@ -15,14 +16,25 @@ class GroupNode : public QWidget
 
 public:
     explicit GroupNode(QWidget *parent = nullptr);
-    GroupNode(int size,QWidget *parent = nullptr);
+    GroupNode(int size,int winSize,QWidget *parent = nullptr);
     ~GroupNode();
-
     void setPlayers(const QVector<Player*> &groupPlayers);
+private slots:
+    void onTimeChanged();
+
+    void on_btAdvance_clicked();
+
+    void on_tableWidget_cellChanged(int row, int column);
+
+    void on_tableWidget_itemChanged(QTableWidgetItem *item);
+
 private:
     QVector<Player*> groupPlayers;
+    QVector<Player*> winners;
     int size;
+    int winSize;
     Ui::GroupNode *ui;
+
 };
 
 #endif // GROUPNODE_H
