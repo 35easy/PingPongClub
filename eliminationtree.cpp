@@ -9,8 +9,6 @@ EliminationTree::EliminationTree(QWidget *parent) :
 }
 
 
-
-
 EliminationTree::~EliminationTree()
 {
     delete ui;
@@ -23,13 +21,15 @@ void EliminationTree::init(int level)
     advance->setText("晋级");
     advance->setFont(QFont("宋体",15));
     advance->setGeometry(WIDGET_WIDTH/2-70,WIDGET_HEIGHT/3,140,50);
+    connect(advance,&QPushButton::clicked,this,&EliminationTree::playerAdvance);
+
 
     root=new EliminationNode(this);
     root->setGeometry(WIDGET_WIDTH/2-70,WIDGET_HEIGHT/2-20,140,40);
     this->level=level;
 }
 
-void EliminationTree::drawTree(QVector<Player>& players)
+void EliminationTree::drawTree(QVector<Player*>& players)
 {
 
     //画图
@@ -46,7 +46,7 @@ void EliminationTree::drawTree(QVector<Player>& players)
 
     //初始化最外层参赛选手结点
     for(int i=0;i<players.size();i++){
-        nodes.push_back(new EliminationNode(&players[i],this));
+        nodes.push_back(new EliminationNode(players[i],this));
     }
     //最外层数
     int outSum=size-end;
@@ -87,8 +87,28 @@ void EliminationTree::drawTree(QVector<Player>& players)
 
         nodes[i]->move(x,y);
     }
-
-
     return;
+}
+
+void EliminationTree::playerAdvance()
+{
+    if(level<=1)
+    {
+        qDebug()<<"比赛已经晋级完毕";
+        return;
+    }
+    //最外层起始数
+    int i=pow(2,level-1),size=nodes.size();
+    while (i<size) {
+        if(i+1>=size||nodes[i]->getScore()>nodes[i+1]->getScore()){
+            nodes[i/2]->setPlayer(nodes[i]->player);
+        }else{
+            nodes[i/2]->setPlayer(nodes[i+1]->player);
+
+        }
+        i+=2;
+    }
+    level--;
+    qDebug()<<"晋级";
 }
 

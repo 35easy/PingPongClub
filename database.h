@@ -31,7 +31,7 @@ public:
     bool insertPlayer(const Player& player);  // 插入选手数据
     bool updatePlayer(const Player& player);  // 更新选手数据
     bool deletePlayer(int playerId);  // 删除选手数据
-    QVector<Player> getAllPlayers();  // 获取所有选手数据
+    QVector<Player*> getAllPlayers();  // 获取所有选手数据
 
     bool insertFixture(const Fixture& Fixture);  // 插入赛事数据
     bool updateFixture(const Fixture& Fixture);  // 更新赛事数据

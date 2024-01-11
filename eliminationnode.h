@@ -14,17 +14,12 @@ class EliminationNode : public QWidget
 public:
     explicit EliminationNode(QWidget *parent = nullptr);
      EliminationNode(Player* player,QWidget *parent = nullptr);
+     void setPlayer(Player* player);
+     int getScore() const;
     ~EliminationNode();
     Player* player;
-
 private:
     Ui::EliminationNode *ui;
-    int score;
-    EliminationNode* parent;
-    EliminationNode* left;
-    EliminationNode* right;
-    int level;
-
 };
 
 #endif // ELIMINATION_H

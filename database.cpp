@@ -186,15 +186,15 @@ bool DataBase::deletePlayer(int playerId) {
     return true;
 }
 
-QVector<Player> DataBase::getAllPlayers() {
+QVector<Player*> DataBase::getAllPlayers() {
     // 获取所有选手数据的代码，根据需要修改
-    QVector<Player> players;
+    QVector<Player*> players;
     QSqlQuery query("SELECT id, name, sex FROM player");
     while (query.next()) {
         int id = query.value(0).toInt();
         QString name = query.value(1).toString();
         QString sex = query.value(2).toString();
-        players.append(Player(id, name, sex));
+        players.append(new Player(id, name, sex));
     }
     return players;
 }

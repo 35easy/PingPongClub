@@ -21,8 +21,10 @@ public:
     explicit EliminationTree(QWidget *parent = nullptr);
     ~EliminationTree();
     void init(int level);
-    void drawTree( QVector<Player>& players);
+    void drawTree( QVector<Player*>& players);
     void drawNode();
+private slots:
+    void playerAdvance();
 private:
     Ui::EliminationTree *ui;
     EliminationNode *root;
