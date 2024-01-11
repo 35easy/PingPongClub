@@ -9,8 +9,8 @@ PlayerManager::PlayerManager(QWidget *parent)
     ui->stackedWidget->setCurrentIndex(0);
 
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
-    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);          //不可修改
+//    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
+
     ui->tableView->setAlternatingRowColors(true);
 
     DataBase &DataBase = DataBase::getInstance();
@@ -30,17 +30,6 @@ void PlayerManager::on_btAddAPlayer_clicked()
     QSqlTableModel *playersModel = DataBase::getInstance().playerTabModel;    //QModelIndex是用来表示model位置的类
 
     //在末尾添加一个
-//    if(!playersModel->insertRow(playersModel->rowCount(),QModelIndex())){
-//           qDebug()<<"创建行失败!";
-//    }
-//    QModelIndex curIndex = playersModel->index(playersModel->rowCount()-1,1);//创建最后一行的modelIndex
-//    int curRecNo=curIndex.row();
-//    QSqlRecord curRec=playersModel->record(curRecNo);        //获取当前记录
-//    curRec.setValue("name",QDateTime::currentDateTime().toString("yyyy-MM-dd"));
-//    curRec.setValue("id",QUuid::createUuid().toString(QUuid::WithoutBraces));
-//    playersModel->setRecord(curRecNo,curRec);
-
-    // 创建新记录
     QSqlRecord newRecord = playersModel->record();
     playersModel->insertRecord(-1, newRecord);
 
@@ -64,66 +53,64 @@ void PlayerManager::on_BTBoxAddPlayer_accepted()
     dataMapper->submit();
     DataBase::getInstance().submitPlayer();
 
-
-
-//清除缓存数据
 //跳转回管理页
 ui->stackedWidget->setCurrentIndex(0);
-
-//    int count = ui->stackedWidget->count();
-
-//    if(count>1){
-//        ui->stackedWidget->setCurrentIndex(count - 2);
-//        ui->label->setText(ui->stackedWidget->currentWidget()->windowTitle());
-//    }
-    //把原窗口删除
-    //QWidget *widget = ui->stackedWidget->widget(count-1);
-    //ui->stackedWidget->removeWidget(widget);
-    //delete widget;
 }
 
-//QSqlTableModel* PlayerManager::getAllPlayersModel() {
-//    playersModel->select();
-//    return playersModel;
-//}
 
-//bool PlayerManager::addPlayer(const QString &name, int seed) {
-//    QSqlRecord record = playersModel->record();
-//    record.setValue("name", name);
-//    record.setValue("seed", seed);
 
-//    if (playersModel->insertRecord(-1, record)) {
-//        return playersModel->submitAll();
+void PlayerManager::on_btAddFilePlayer_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, "选择文件", "../", "文本文件 (*.xlsx);;所有文件 (*.*)");
+    if (!fileName.isEmpty()) {
+        xlsx=new QXlsx::Document(fileName);
+        qDebug() << "选择的文件：" << fileName;
+    } else {
+        // 用户取消选择文件
+        qDebug() << "用户取消选择文件";
+        return;
+    }
+
+
+    if(!xlsx->load())
+        qDebug()<<"excel打开失败";
+    //处理表格除去前面的无用项
+    int colSum=xlsx->dimension().columnCount(),rowSum=xlsx->dimension().rowCount();
+    int row=1,col=colSum;
+    while (!xlsx->read(row,col).isValid()) row++;
+    row++;//去表头
+
+    QString id,name,sex;
+    for (;row<rowSum;row++) {
+//        id=xlsx->read(row,0).toString();
+        name=xlsx->read(row,1).toString();
+        sex=xlsx->read(row,2).toString();
+        DataBase::getInstance().insertPlayer(Player(name,sex));
+        qDebug()<<id<<name<<sex;
+    }
+
+
+    //插入方法
+//    QString insertItem;
+//    for (auto iter=header.begin();iter!=header.end();iter++) {
+//        insertItem+=iter;
+//        insertItem.append(',');
+//    }
+//    insertItem.chop(1);
+
+//    QString insertPre= "insert into player("+insertItem+")";
+
+//    QString insertValue;
+//    for (int i=row+1;i<=rowCount;i++) {
+//        insertValue="values(";
+//        for(int j=1;j<=colCount;j++)
+//            insertValue+="'"+xlsx->read(i,j).toString()+"',";
+//        insertValue.chop(1);
+//        insertValue.append(')');
+
+//        if(!query->exec(insertPre+insertValue))
+//            qDebug() <<"can't not insert table:"<< query->lastError().text();
 //    }
 
-//    return false;
-//}
 
-//bool PlayerManager::deletePlayer(int playerId) {
-//    if (playersModel->removeRow(playerId)) {
-//        return playersModel->submitAll();
-//    }
-
-//    return false;
-//}
-
-//bool PlayerManager::updatePlayer(int playerId, const QString &name, int seed) {
-//    QSqlRecord record = playersModel->record(playerId);
-//    record.setValue("name", name);
-//    record.setValue("seed", seed);
-
-//    if (playersModel->setRecord(playerId, record)) {
-//        return playersModel->submitAll();
-//    }
-
-//    return false;
-//}
-
-//void PlayerManager::setupPlayersModel() {
-//    playersModel = new QSqlTableModel(this, QSqlDatabase::database());
-//    playersModel->setTable("players");
-//    playersModel->select();
-
-
-
-//}
+}

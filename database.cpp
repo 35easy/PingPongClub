@@ -110,7 +110,7 @@ bool DataBase::createTables() {
 bool DataBase::insertPlayer(const Player& player) {
     // 插入选手数据的代码，根据需要修改
     QSqlQuery query;
-    query.prepare("INSERT INTO players (name, gender) VALUES (?, ?)");
+    query.prepare("INSERT INTO player (name, sex) VALUES (?, ?)");
     query.addBindValue(player.getName());
     query.addBindValue(player.getGender());
 

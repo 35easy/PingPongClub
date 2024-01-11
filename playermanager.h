@@ -2,13 +2,13 @@
 #define PLAYERMANAGER_H
 #include <QObject>
 #include <QWidget>
-
+#include <QFileDialog>
 #include <QSqlTableModel>
 #include <QSqlRecord>
 #include "player.h"
 #include <QDataWidgetMapper>
 #include "database.h"
-
+#include "xlsxdocument.h"
 namespace Ui {
 class PlayerManager;
 }
@@ -35,11 +35,14 @@ private slots:
 
     void on_BTBoxAddPlayer_accepted();
 
+    void on_btAddFilePlayer_clicked();
+
 private:
     Ui::PlayerManager *ui;
 //    QSqlTableModel *playersModel;
     QDataWidgetMapper *dataMapper;  //数据映射
-    void setupPlayersModel();
+    QXlsx::Document* xlsx = nullptr;
+
 };
 
 #endif // PLAYERMANAGER_H
