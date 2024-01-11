@@ -109,11 +109,11 @@ bool DataBase::createTables() {
         return false;
     }
 
-    if (!query.exec("CREATE TABLE IF NOT EXISTS tournaments ("
+    if (!query.exec("CREATE TABLE IF NOT EXISTS Fixtures ("
                     "id INTEGER PRIMARY KEY AUTOINCREMENT, "
                     "name TEXT, "
                     "date DATE)")) {
-        qDebug() << "Create Tournaments Table Error: " << query.lastError().text();
+        qDebug() << "Create Fixtures Table Error: " << query.lastError().text();
         return false;
     }
 
@@ -199,59 +199,59 @@ QVector<Player> DataBase::getAllPlayers() {
     return players;
 }
 
-bool DataBase::insertTournament(const Tournament& tournament) {
+bool DataBase::insertFixture(const Fixture& Fixture) {
     // 插入赛事数据的代码，根据需要修改
     QSqlQuery query;
-    query.prepare("INSERT INTO tournaments (name, date) VALUES (?, ?)");
-    query.addBindValue(tournament.getName());
-    query.addBindValue(tournament.getDate());
+    query.prepare("INSERT INTO Fixtures (name, date) VALUES (?, ?)");
+    query.addBindValue(Fixture.getName());
+    query.addBindValue(Fixture.getDate());
 
     if (!query.exec()) {
-        qDebug() << "Insert Tournament Error: " << query.lastError().text();
+        qDebug() << "Insert Fixture Error: " << query.lastError().text();
         return false;
     }
     return true;
 }
 
-bool DataBase::updateTournament(const Tournament& tournament) {
+bool DataBase::updateFixture(const Fixture& Fixture) {
     // 更新赛事数据的代码，根据需要修改
     QSqlQuery query;
-    query.prepare("UPDATE tournaments SET name = ?, date = ? WHERE id = ?");
-    query.addBindValue(tournament.getName());
-    query.addBindValue(tournament.getDate());
-    query.addBindValue(tournament.getId());
+    query.prepare("UPDATE Fixtures SET name = ?, date = ? WHERE id = ?");
+    query.addBindValue(Fixture.getName());
+    query.addBindValue(Fixture.getDate());
+    query.addBindValue(Fixture.getId());
 
     if (!query.exec()) {
-        qDebug() << "Update Tournament Error: " << query.lastError().text();
+        qDebug() << "Update Fixture Error: " << query.lastError().text();
         return false;
     }
     return true;
 }
 
-bool DataBase::deleteTournament(int tournamentId) {
+bool DataBase::deleteFixture(int FixtureId) {
     // 删除赛事数据的代码，根据需要修改
     QSqlQuery query;
-    query.prepare("DELETE FROM tournaments WHERE id = ?");
-    query.addBindValue(tournamentId);
+    query.prepare("DELETE FROM Fixtures WHERE id = ?");
+    query.addBindValue(FixtureId);
 
     if (!query.exec()) {
-        qDebug() << "Delete Tournament Error: " << query.lastError().text();
+        qDebug() << "Delete Fixture Error: " << query.lastError().text();
         return false;
     }
     return true;
 }
 
-QVector<Tournament> DataBase::getAllTournaments() {
+QVector<Fixture> DataBase::getAllFixtures() {
     // 获取所有赛事数据的代码，根据需要修改
-    QVector<Tournament> tournaments;
-    QSqlQuery query("SELECT id, name, date FROM tournaments");
+    QVector<Fixture> Fixtures;
+    QSqlQuery query("SELECT id, name, date FROM Fixtures");
     while (query.next()) {
         int id = query.value(0).toInt();
         QString name = query.value(1).toString();
         QDate date = query.value(2).toDate();
-        tournaments.append(Tournament(id, name, date));
+        Fixtures.append(Fixture(id, name, date));
     }
-    return tournaments;
+    return Fixtures;
 }
 
 

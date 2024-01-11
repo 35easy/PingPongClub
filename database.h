@@ -6,8 +6,7 @@
 #include <QtSql>
 #include <QSqlDatabase>
 #include "player.h"
-#include "tournament.h"
-
+#include "fixture.h"
 class DataBase : public QObject
 {
     Q_OBJECT
@@ -34,10 +33,10 @@ public:
     bool deletePlayer(int playerId);  // 删除选手数据
     QVector<Player> getAllPlayers();  // 获取所有选手数据
 
-    bool insertTournament(const Tournament& tournament);  // 插入赛事数据
-    bool updateTournament(const Tournament& tournament);  // 更新赛事数据
-    bool deleteTournament(int tournamentId);  // 删除赛事数据
-    QVector<Tournament> getAllTournaments();  // 获取所有赛事数据
+    bool insertFixture(const Fixture& Fixture);  // 插入赛事数据
+    bool updateFixture(const Fixture& Fixture);  // 更新赛事数据
+    bool deleteFixture(int FixtureId);  // 删除赛事数据
+    QVector<Fixture> getAllFixtures();  // 获取所有赛事数据
 
     QSqlTableModel *playerTabModel;       //数据模型
     QItemSelectionModel *playerSelection;  //选择模型
