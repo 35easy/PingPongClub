@@ -5,6 +5,7 @@
 #include <QObject>
 #include <QtSql>
 #include <QSqlDatabase>
+#include <QMessageBox>
 #include "player.h"
 #include "fixture.h"
 class DataBase : public QObject
@@ -19,19 +20,20 @@ public:
         return instance;
     }
     void initDataBase();
-    bool initPlayerModel();
+    bool initModel(QString tableName);
+    bool insertPlayer(const Player& player);  // 插入选手数据
     bool submitPlayer();
-    void clearPlayer();
-
-
-
+    void clearPlayer(QString tableName);
     bool openConnection();
     void closeConnection();
+    void appendBySql(QString tableName,const Player& player);
+
+
+    void copyRecord(bool isFromplayer);
     bool createTables();  // 创建数据库表格
-    bool insertPlayer(const Player& player);  // 插入选手数据
     bool updatePlayer(const Player& player);  // 更新选手数据
     bool deletePlayer(int playerId);  // 删除选手数据
-    QVector<Player*> getAllPlayers();  // 获取所有选手数据
+    QVector<Player*> getAllPlayers(QString tableName);  // 获取所有选手数据
 
     bool insertFixture(const Fixture& Fixture);  // 插入赛事数据
     bool updateFixture(const Fixture& Fixture);  // 更新赛事数据
@@ -40,6 +42,10 @@ public:
 
     QSqlTableModel *playerTabModel;       //数据模型
     QItemSelectionModel *playerSelection;  //选择模型
+    QSqlTableModel *seedTabModel;       //数据模型
+    QItemSelectionModel *seedSelection;  //选择模型
+
+
 private:
     //DataBase类的构造函数是私有的，意味着无法从类外部调用它。
     explicit DataBase(QObject *parent = nullptr);

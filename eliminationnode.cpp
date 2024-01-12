@@ -6,8 +6,8 @@ EliminationNode::EliminationNode(QWidget *parent) :
     ui(new Ui::EliminationNode)
 {
     ui->setupUi(this);
+    player=NULL;
 //    setWindowFlags(Qt::FramelessWindowHint);//无边框
-
 }
 
 EliminationNode::EliminationNode(Player *player, QWidget *parent) :
@@ -20,15 +20,14 @@ EliminationNode::EliminationNode(Player *player, QWidget *parent) :
 void EliminationNode::setPlayer(Player *player)
 {
     this->player=player;
-    ui->nameEdit->setText(player->getName());
+    if(player!=NULL)
+         ui->nameEdit->setText(player->getName());
 }
 
 int EliminationNode::getScore() const
 {
     return ui->scoreEdit->value();
 }
-
-
 
 EliminationNode::~EliminationNode()
 {

@@ -1,5 +1,6 @@
 #include "database.h"
 
+
 DataBase::DataBase(QObject *parent) : QObject(parent)
 {
     initDataBase();
@@ -18,34 +19,46 @@ void DataBase::initDataBase()
     else{
         qDebug()<<"failed to open DataBase";
     }
+    playerTabModel=new QSqlTableModel(this,db);
+    seedTabModel=new QSqlTableModel(this,db);
 }
 
-bool DataBase::initPlayerModel()
+bool DataBase:: initModel(QString tableName)
 {
-    playerTabModel = new QSqlTableModel(this,db);
-    playerTabModel->setTable("player");
-    playerTabModel->setEditStrategy(QSqlTableModel::OnManualSubmit);                       //数据保存方式,OnManualSubmit, OnRowChange
-    playerTabModel->setSort(playerTabModel->fieldIndex("id"),Qt::AscendingOrder);       //排序
-    if (!(playerTabModel->select())) {
+    QSqlTableModel *model;
+    if(tableName=="player"){
+        model=playerTabModel;
+        playerSelection = new QItemSelectionModel(model);
+
+    }
+    else{
+        model=seedTabModel;
+        seedSelection = new QItemSelectionModel(model);
+
+    }
+
+    model->setTable(tableName);
+    model->setEditStrategy(QSqlTableModel::OnManualSubmit);                       //数据保存方式,OnManualSubmit, OnRowChange
+    model->setSort(model->fieldIndex("id"),Qt::AscendingOrder);       //排序
+    if (!(model->select())) {
            // 如果表不存在，尝试创建表
            QSqlQuery createTableQuery(db);
-           QString createTableSQL = "CREATE TABLE IF NOT EXISTS player "
+           QString createTableSQL = "CREATE TABLE IF NOT EXISTS "+tableName+
                                     "(id INTEGER PRIMARY KEY AUTOINCREMENT, "
                                     "name VARCHAR(50), "
                                     "sex VARCHAR(2))";
            if (!createTableQuery.exec(createTableSQL)) {
                // 创建表失败，输出错误信息
-               qDebug() << "Error creating 'player' table:" << createTableQuery.lastError().text();
+               qDebug() << "Error creating '"+tableName+"' table:" << createTableQuery.lastError().text();
                return false;
            }
     }
     // 重新尝试查询数据
-         if (!(playerTabModel->select())) {
-             qDebug() << "Error selecting data from 'player' table:" << playerTabModel->lastError().text();
+         if (!(model->select())) {
+             qDebug() << "Error selecting data from '"+tableName+"' table:" << model->lastError().text();
              return false;
          }
 
-    playerSelection = new QItemSelectionModel(playerTabModel);
     return true;
 }
 
@@ -67,7 +80,7 @@ bool DataBase::submitPlayer()
 
 }
 
-void DataBase::clearPlayer()
+void DataBase::clearPlayer(QString tableName)
 {
    playerTabModel->removeRows(0,playerTabModel->rowCount());
    if(playerTabModel->submitAll()){
@@ -98,27 +111,18 @@ void DataBase::closeConnection() {
     db.close();
 }
 
-bool DataBase::createTables() {
-    // 创建数据库表格的代码，根据需要修改
-    QSqlQuery query;
-    if (!query.exec("CREATE TABLE IF NOT EXISTS players ("
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    "name TEXT, "
-                    "gender TEXT)")) {
-        qDebug() << "Create Players Table Error: " << query.lastError().text();
-        return false;
-    }
+void DataBase::appendBySql(QString tableName,const Player& player)
+{
 
-    if (!query.exec("CREATE TABLE IF NOT EXISTS Fixtures ("
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    "name TEXT, "
-                    "date DATE)")) {
-        qDebug() << "Create Fixtures Table Error: " << query.lastError().text();
-        return false;
-    }
+     //插入选手数据的代码，根据需要修改
+        QSqlQuery query;
+        query.prepare("INSERT INTO "+tableName+" (name, sex) VALUES (?, ?)");
+        query.addBindValue(player.getName());
+        query.addBindValue(player.getGender());
 
-
-    return true;
+        if (!query.exec()) {
+            qDebug() << "Insert Player Error: " << query.lastError().text();
+        }
 }
 
 bool DataBase::insertPlayer(const Player& player) {
@@ -136,27 +140,40 @@ bool DataBase::insertPlayer(const Player& player) {
 
     // 提交修改到数据库
     if (!playerTabModel->submitAll()) {
-        qDebug() << "Insert Player Error: " << playerTabModel->lastError().text();
+        qDebug() << "Insert Error: " << playerTabModel->lastError().text();
         playerTabModel->revertAll(); // 如果提交失败，回滚修改
         return false;
     }
 
     return true;
-
-
-
-// 插入选手数据的代码，根据需要修改
-//    QSqlQuery query;
-//    query.prepare("INSERT INTO player (name, sex) VALUES (?, ?)");
-//    query.addBindValue(player.getName());
-//    query.addBindValue(player.getGender());
-
-//    if (!query.exec()) {
-//        qDebug() << "Insert Player Error: " << query.lastError().text();
-//        return false;
-//    }
-//    return true;
 }
+
+
+
+//弃用
+void DataBase::copyRecord(bool isFromplayer)
+{
+    QSqlQuery query;
+    QString from="player",to="seed";
+    if(!isFromplayer){
+        from=to;
+        to="player";
+}
+
+// 执行 SQL 语句，复制记录
+    query.prepare("INSERT INTO ? (id, name,sex)"
+                  "SELECT id, name, sex"
+                  "FROM ?"
+                  "WHERE your_condition;");
+
+   if (!query.exec())
+   {
+      qDebug()<<query.lastError().text();
+   }
+}
+
+
+
 
 bool DataBase::updatePlayer(const Player& player) {
     // 更新选手数据的代码，根据需要修改
@@ -186,10 +203,10 @@ bool DataBase::deletePlayer(int playerId) {
     return true;
 }
 
-QVector<Player*> DataBase::getAllPlayers() {
+QVector<Player*> DataBase::getAllPlayers(QString tableName) {
     // 获取所有选手数据的代码，根据需要修改
     QVector<Player*> players;
-    QSqlQuery query("SELECT id, name, sex FROM player");
+    QSqlQuery query("SELECT id, name, sex FROM "+tableName);
     while (query.next()) {
         int id = query.value(0).toInt();
         QString name = query.value(1).toString();
@@ -199,6 +216,30 @@ QVector<Player*> DataBase::getAllPlayers() {
     return players;
 }
 
+
+//弃用代码
+bool DataBase::createTables() {
+    // 创建数据库表格的代码，根据需要修改
+    QSqlQuery query;
+    if (!query.exec("CREATE TABLE IF NOT EXISTS players ("
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    "name TEXT, "
+                    "gender TEXT)")) {
+        qDebug() << "Create Players Table Error: " << query.lastError().text();
+        return false;
+    }
+
+    if (!query.exec("CREATE TABLE IF NOT EXISTS Fixtures ("
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    "name TEXT, "
+                    "date DATE)")) {
+        qDebug() << "Create Fixtures Table Error: " << query.lastError().text();
+        return false;
+    }
+
+
+    return true;
+}
 bool DataBase::insertFixture(const Fixture& Fixture) {
     // 插入赛事数据的代码，根据需要修改
     QSqlQuery query;

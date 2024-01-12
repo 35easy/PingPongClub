@@ -23,6 +23,7 @@ public:
     void init(int level);
     void drawTree( QVector<Player*>& players);
     void drawNode();
+    void saveResult();
 private slots:
     void playerAdvance();
 private:

@@ -1,6 +1,8 @@
 #include "eliminationtree.h"
 #include "ui_eliminationtree.h"
 
+#include <QFileDialog>
+
 EliminationTree::EliminationTree(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::EliminationTree)
@@ -90,17 +92,32 @@ void EliminationTree::drawTree(QVector<Player*>& players)
     return;
 }
 
+void EliminationTree::saveResult()
+{
+    // 获取窗口截图
+   QPixmap screenshot = this->grab();
+
+   // 获取用户选择的保存路径
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Save Screenshot"), "", tr("Images (*.png)"));
+
+   // 保存截图到文件
+   screenshot.save(filePath);
+}
+
 void EliminationTree::playerAdvance()
 {
     if(level<=1)
     {
         qDebug()<<"比赛已经晋级完毕";
+        saveResult();
         return;
     }
     //最外层起始数
     int i=pow(2,level-1),size=nodes.size();
     while (i<size) {
-        if(i+1>=size||nodes[i]->getScore()>nodes[i+1]->getScore()){
+
+
+        if(i+1>=size||nodes[i]->getScore()>nodes[i+1]->getScore()||nodes[i+1]->player==NULL){
             nodes[i/2]->setPlayer(nodes[i]->player);
         }else{
             nodes[i/2]->setPlayer(nodes[i+1]->player);

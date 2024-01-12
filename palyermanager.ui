@@ -42,6 +42,29 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
+            <widget class="QPushButton" name="btAddFilePlayer">
+             <property name="text">
+              <string>导入文件</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_7">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeType">
+              <enum>QSizePolicy::Minimum</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
             <widget class="QLabel" name="label_9">
              <property name="text">
               <string>选手人数:</string>
@@ -86,30 +109,30 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_4">
            <item>
-            <widget class="QPushButton" name="btAddFilePlayer">
+            <widget class="QPushButton" name="btIsSeed">
              <property name="text">
-              <string>从文件中导入</string>
+              <string>设置为种子选手</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="btAddAPlayer">
              <property name="text">
-              <string>添加一个选手</string>
+              <string>添加选手</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="btDeletPlayer">
              <property name="text">
-              <string> 删除选中选手</string>
+              <string>删除选手</string>
              </property>
             </widget>
            </item>
            <item>
             <widget class="QPushButton" name="btClearPlayer">
              <property name="text">
-              <string>从数据库清空</string>
+              <string>清空</string>
              </property>
             </widget>
            </item>
@@ -146,7 +169,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QPushButton" name="pushButton_2">
+            <widget class="QPushButton" name="btSelectSex">
              <property name="text">
               <string>选择性别</string>
              </property>
@@ -438,21 +461,6 @@
         </spacer>
        </item>
       </layout>
-     </widget>
-     <widget class="QWidget" name="page_2">
-      <widget class="QPushButton" name="pushButton">
-       <property name="geometry">
-        <rect>
-         <x>260</x>
-         <y>140</y>
-         <width>93</width>
-         <height>28</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>PushButton</string>
-       </property>
-      </widget>
      </widget>
     </widget>
    </item>

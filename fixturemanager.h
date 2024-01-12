@@ -16,8 +16,8 @@ class FixtureManager : public QWidget
 public:
     explicit FixtureManager(QWidget *parent = nullptr);
     ~FixtureManager();
-    void EliminationStart(QVector<Player*>& players);
-    void GroupStart(QVector<Player*>& players);
+    void EliminationStart(QVector<Player*>& players,int level);
+    void GroupStart(QVector<Player*>& players,int groupCount,int groupContain,int winSize);
 
 signals:
     void gotoPlayerManager();

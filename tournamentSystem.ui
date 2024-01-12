@@ -43,7 +43,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btSeedPlayer">
+      <widget class="QPushButton" name="btSeed">
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
          <horstretch>0</horstretch>
@@ -62,19 +62,9 @@
      <property name="currentIndex">
       <number>0</number>
      </property>
-     <widget class="QWidget" name="tab_2">
-      <attribute name="title">
-       <string>种子选手</string>
-      </attribute>
-     </widget>
-     <widget class="QWidget" name="tab_3">
-      <attribute name="title">
-       <string>小组赛赛程</string>
-      </attribute>
-     </widget>
      <widget class="QWidget" name="tab_5">
       <attribute name="title">
-       <string> 淘汰赛赛程</string>
+       <string> 开始</string>
       </attribute>
      </widget>
     </widget>
@@ -83,7 +73,4 @@
  </widget>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="buttonGroup"/>
- </buttongroups>
 </ui>

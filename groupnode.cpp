@@ -87,20 +87,6 @@ GroupNode::~GroupNode()
     delete ui;
 }
 
-void GroupNode::setPlayers(const QVector<Player *> &groupPlayers)
-{
-    this->groupPlayers=groupPlayers;
-    // 设置表头
-    QStringList headers;
-
-    for(auto it:groupPlayers){
-        headers <<it->getName();
-    }
-    //纵向和横向表头
-    ui->tableWidget->setHorizontalHeaderLabels(headers);
-    ui->tableWidget->setVerticalHeaderLabels(headers);
-}
-
 //晋级
 void GroupNode::on_btAdvance_clicked()
 {
@@ -150,4 +136,20 @@ void GroupNode::on_tableWidget_cellChanged(int row, int column)
 void GroupNode::on_tableWidget_itemChanged(QTableWidgetItem *item)
 {
     qDebug()<<"itemChanged:"<<item;
+}
+
+
+//弃用的分配方式
+void GroupNode::setPlayers(const QVector<Player *> &groupPlayers)
+{
+    this->groupPlayers=groupPlayers;
+    // 设置表头
+    QStringList headers;
+
+    for(auto it:groupPlayers){
+        headers <<it->getName();
+    }
+    //纵向和横向表头
+    ui->tableWidget->setHorizontalHeaderLabels(headers);
+    ui->tableWidget->setVerticalHeaderLabels(headers);
 }

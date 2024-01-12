@@ -26,6 +26,7 @@ SOURCES += \
     mainwindow.cpp \
     player.cpp \
     playermanager.cpp \
+    seedmanager.cpp \
     tournamentSystem.cpp
 
 HEADERS += \
@@ -39,6 +40,7 @@ HEADERS += \
     mainwindow.h \
     player.h \
     playermanager.h \
+    seedmanager.h \
     tournamentSystem.h
 
 FORMS += \
