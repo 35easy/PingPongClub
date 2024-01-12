@@ -12,6 +12,8 @@ PlayerManager::PlayerManager(QWidget *parent)
     tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 //    ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
     tableView->setAlternatingRowColors(true);
+    int cellSize = 180;
+    ui->tableView->horizontalHeader()->setDefaultSectionSize(cellSize);
 
 
 }
@@ -96,7 +98,7 @@ void PlayerManager::on_btAddFilePlayer_clicked()
 void PlayerManager::on_btClearPlayer_clicked()
 {
 
-    DataBase::getInstance().clearPlayer(tableName);
+    DataBase::getInstance().clearBySql(tableName);
 }
 
 void PlayerManager::on_btPlayerOK_clicked()

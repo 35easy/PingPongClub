@@ -7,6 +7,11 @@
 #include <QVector>
 #include <QDebug>
 #include <QtMath>
+#include <QFileDialog>
+#include <QPainter>
+#include <QPen>
+
+
 #include "eliminationnode.h"
 #include "player.h"
 namespace Ui {
@@ -24,6 +29,8 @@ public:
     void drawTree( QVector<Player*>& players);
     void drawNode();
     void saveResult();
+    void paintEvent(QPaintEvent *event);
+
 private slots:
     void playerAdvance();
 private:

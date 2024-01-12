@@ -1,13 +1,13 @@
 #include "eliminationtree.h"
 #include "ui_eliminationtree.h"
 
-#include <QFileDialog>
 
 EliminationTree::EliminationTree(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::EliminationTree)
 {
     ui->setupUi(this);
+
 }
 
 
@@ -19,6 +19,7 @@ EliminationTree::~EliminationTree()
 void EliminationTree::init(int level)
 {
     this->setFixedSize(WIDGET_WIDTH,WIDGET_HEIGHT);           //设置页面长宽
+//    this->showFullScreen();
     advance=new QPushButton(this);
     advance->setText("晋级");
     advance->setFont(QFont("宋体",15));
@@ -60,7 +61,7 @@ void EliminationTree::drawTree(QVector<Player*>& players)
     nodes[2]->move(x-WIDGET_WIDTH/(level*2-1),y);
     nodes[3]->move(x+WIDGET_WIDTH/(level*2-1),y);
     int currentLevel=3;
-    int h= WIDGET_HEIGHT/6;
+    float h= WIDGET_HEIGHT/4;
     for (int i=4;i<nodes.size();i++) {
 
         //区分左右用当前层数
@@ -68,7 +69,7 @@ void EliminationTree::drawTree(QVector<Player*>& players)
         //更新层数
         if(pow(2,currentLevel)-1<i){
             currentLevel++;
-            h=WIDGET_HEIGHT/(i*2);
+            h=WIDGET_HEIGHT/(i+1);
         }
 
         //左
@@ -101,7 +102,25 @@ void EliminationTree::saveResult()
     QString filePath = QFileDialog::getSaveFileName(this, tr("Save Screenshot"), "", tr("Images (*.png)"));
 
    // 保存截图到文件
-   screenshot.save(filePath);
+    screenshot.save(filePath);
+}
+//
+void EliminationTree::paintEvent(QPaintEvent *event)
+{
+
+    QPainter painter(this);
+    painter.setPen(QPen(Qt::black,2));//设置画笔形式
+    int size=nodes.size();
+    for (int i=1;i*2+1<size;i++) {
+       if(i*2<size){
+             painter.drawLine(nodes[i]->geometry().center(),nodes[i*2]->geometry().center());
+       }
+
+       if(i*2+1<size){
+           painter.drawLine(nodes[i]->geometry().center(),nodes[i*2+1]->geometry().center());
+
+       }
+    }
 }
 
 void EliminationTree::playerAdvance()

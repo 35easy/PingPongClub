@@ -13,6 +13,24 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget {
+    background-color: #ECF0F1; /* 设置背景颜色 */
+    color: #333333; /* 设置文本颜色 */
+}
+
+/* 如果需要添加边框，可以使用 border 属性 */
+QWidget {
+    border: 2px solid rgb(0, 154, 231);
+    border-radius: 5px; /* 设置边框圆角 */
+}
+
+/* 如果需要在获取焦点时改变外观，可以使用 :focus 伪类 */
+QWidget:focus {
+    border: 2px solid #3498DB;
+}
+</string>
+  </property>
  </widget>
  <resources/>
  <connections/>
