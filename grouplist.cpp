@@ -27,10 +27,31 @@ void GroupList::init(int count,int contain,int winSize)
 void GroupList::GenerateList(QVector<Player*>& players)
 {
     GroupNode* node;
+    //初始化list
     for (int i=0;i<groupCount;i++) {
         node=new GroupNode(contain,winSize);
-        node->setPlayers(players.mid(i * contain, contain));
-        list.push_back(node);
+        list.append(node);
         pLayout->addWidget(node);
     }
+
+    int start=0;
+    //分配选手,这种分配方法好处是使每一组人数更平均,避免人数不够导致最后一组人数极少的情况
+    for(int i=0;i<players.size();i++){
+        if(i%groupCount==0)
+            start=i;
+        list[i-start]->addPlayer(players[i]);
+    }
+
+    //初始化表每个节点表格
+    for (auto it:list) {
+        it->initTableWidget();
+    }
+
+//    return;
+//    for (int i=0;i<groupCount;i++) {
+//        node=new GroupNode(contain,winSize);
+//        node->setPlayers(players.mid(i * contain, contain));
+//        list.push_back(node);
+//        pLayout->addWidget(node);
+//    }
 }

@@ -17,6 +17,8 @@ class GroupNode : public QWidget
 public:
     explicit GroupNode(QWidget *parent = nullptr);
     GroupNode(int size,int winSize,QWidget *parent = nullptr);
+    void addPlayer(Player *player);
+    void initTableWidget();
     ~GroupNode();
     void setPlayers(const QVector<Player*> &groupPlayers);
 private slots:

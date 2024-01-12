@@ -17,6 +17,15 @@ GroupNode::GroupNode(int size,int winSize, QWidget *parent):
     ui->setupUi(this);
     this->size=size;
     this->winSize=winSize;
+}
+
+void GroupNode::addPlayer(Player *player)
+{
+    groupPlayers.append(player);
+}
+
+void GroupNode::initTableWidget()
+{
     // 创建表格
     ui->tableWidget->setRowCount(size);  // 设置行数
     ui->tableWidget->setColumnCount(size);  // 设置列数
@@ -39,13 +48,20 @@ GroupNode::GroupNode(int size,int winSize, QWidget *parent):
                 ui->tableWidget->setCellWidget(i, j, scoreEdit);
                 // 为每个 QTimeEdit 添加时间变化的信号连接
                 connect(scoreEdit, SIGNAL(timeChanged(const QTime &)), this, SLOT(onTimeChanged()));
-
-
             }else{
 
             }
         }
     }
+    // 设置表头
+    QStringList headers;
+
+    for(auto it:groupPlayers){
+        headers <<it->getName();
+    }
+    //纵向和横向表头
+    ui->tableWidget->setHorizontalHeaderLabels(headers);
+    ui->tableWidget->setVerticalHeaderLabels(headers);
 
 
 }
