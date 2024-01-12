@@ -21,6 +21,9 @@ public:
     void initTableWidget();
     ~GroupNode();
     void setPlayers(const QVector<Player*> &groupPlayers);
+
+    QVector<Player*> winners;
+
 private slots:
     void onTimeChanged();
 
@@ -32,7 +35,6 @@ private slots:
 
 private:
     QVector<Player*> groupPlayers;
-    QVector<Player*> winners;
     int size;
     int winSize;
     Ui::GroupNode *ui;

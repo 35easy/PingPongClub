@@ -5,6 +5,7 @@
 
 #include <QGridLayout>
 #include <QWidget>
+#include "database.h"
 
 #include "groupnode.h"
 namespace Ui {
@@ -21,6 +22,9 @@ public:
     QGridLayout *pLayout;
     void init(int count,int contain,int winSize);
     void GenerateList(QVector<Player*>& players);
+private slots:
+    void on_btOK_clicked();
+
 private:
     Ui::GroupList *ui;
     int groupCount;

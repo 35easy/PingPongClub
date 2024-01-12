@@ -90,8 +90,6 @@ GroupNode::~GroupNode()
 //晋级
 void GroupNode::on_btAdvance_clicked()
 {
-
-
    //<players索引,分数>
    QVector<QPair<int, int>> pairs;
    int score=0;
@@ -112,9 +110,13 @@ void GroupNode::on_btAdvance_clicked()
    std::sort(pairs.begin(), pairs.end(), [](const QPair<int, int> &a, const QPair<int, int> &b){        return a.second > b.second;});
     int index;
 
+
    for (int i=0;i<winSize;i++) {
+
        // 更改第 n 列的表头字体颜色
         index=pairs[i].first;
+        winners.append(groupPlayers[index]);
+
        QFont font = ui->tableWidget->horizontalHeaderItem(index)->font();
        font.setBold(true);
 

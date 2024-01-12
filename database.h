@@ -27,13 +27,15 @@ public:
     bool openConnection();
     void closeConnection();
     void appendBySql(QString tableName,const Player& player);
-
+    void clearBySql(QString tableName);
 
     void copyRecord(bool isFromplayer);
     bool createTables();  // 创建数据库表格
     bool updatePlayer(const Player& player);  // 更新选手数据
     bool deletePlayer(int playerId);  // 删除选手数据
     QVector<Player*> getAllPlayers(QString tableName);  // 获取所有选手数据
+
+
 
     bool insertFixture(const Fixture& Fixture);  // 插入赛事数据
     bool updateFixture(const Fixture& Fixture);  // 更新赛事数据

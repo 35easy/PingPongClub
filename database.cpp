@@ -88,12 +88,7 @@ void DataBase::clearPlayer(QString tableName)
    }else {
        qDebug() << "删除失败:" << playerTabModel->lastError().text();
    }
-//    QSqlQuery query;
-//   if (query.exec("DELETE FROM player;")) {
-//       qDebug() << "Player table records deleted successfully.";
-//   } else {
-//       qDebug() << "Failed to delete records from Player table:" << query.lastError().text();
-//   }
+
 }
 
 
@@ -123,6 +118,16 @@ void DataBase::appendBySql(QString tableName,const Player& player)
         if (!query.exec()) {
             qDebug() << "Insert Player Error: " << query.lastError().text();
         }
+}
+
+void DataBase::clearBySql(QString tableName)
+{
+        QSqlQuery query;
+       if (query.exec("DELETE FROM "+tableName)) {
+           qDebug() << " table records deleted successfully.";
+       } else {
+           qDebug() << "Failed to delete records from Player table:" << query.lastError().text();
+       }
 }
 
 bool DataBase::insertPlayer(const Player& player) {

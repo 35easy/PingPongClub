@@ -1,6 +1,8 @@
 #include "grouplist.h"
 #include "ui_grouplist.h"
 
+#include <QFileDialog>
+
 GroupList::GroupList(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::GroupList)
@@ -54,4 +56,28 @@ void GroupList::GenerateList(QVector<Player*>& players)
 //        list.push_back(node);
 //        pLayout->addWidget(node);
 //    }
+}
+
+void GroupList::on_btOK_clicked()
+{
+
+    // 获取窗口截图
+   QPixmap screenshot =ui->scrollAreaWidgetContents->grab();
+   // 获取用户选择的保存路径
+    QString filePath = QFileDialog::getSaveFileName(this, tr("Save Screenshot"), "", tr("Images (*.png)"));
+   // 保存截图到文件
+   screenshot.save(filePath);
+
+   //更新到数据库
+   DataBase& db=DataBase::getInstance();
+   db.clearBySql("player");
+    for(auto node:list){
+        for(auto win:node->winners){
+            db.appendBySql("player",*win);
+        }
+    }
+
+
+    this->close();
+    this->destroy();
 }

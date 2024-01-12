@@ -115,8 +115,6 @@ void EliminationTree::playerAdvance()
     //最外层起始数
     int i=pow(2,level-1),size=nodes.size();
     while (i<size) {
-
-
         if(i+1>=size||nodes[i]->getScore()>nodes[i+1]->getScore()||nodes[i+1]->player==NULL){
             nodes[i/2]->setPlayer(nodes[i]->player);
         }else{
