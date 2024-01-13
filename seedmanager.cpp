@@ -16,7 +16,7 @@ void SeedManager::initUI()
     ui->btFindPlayer->setText("查询种子选手");
     ui->btDeletPlayer->hide();
     ui->btAddFilePlayer->hide();
-
+    ui->playerType->setText(" 种子选手人数");
 }
 
 
@@ -36,4 +36,6 @@ void SeedManager::initDataBase()
     else{
         qDebug()<<"PlayerModel init failed";
     }
+    ui->playerCount->setText(QString::number(model->rowCount()));
+
 }

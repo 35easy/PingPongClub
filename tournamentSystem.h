@@ -1,6 +1,6 @@
 #ifndef TOURNAMENTSYSTEM_H
 #define TOURNAMENTSYSTEM_H
-
+#include "ui_fixturemanager.h"
 #include "playermanager.h"
 #include "seedmanager.h"
 #include "fixturemanager.h"

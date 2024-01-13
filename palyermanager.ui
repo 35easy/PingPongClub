@@ -65,14 +65,14 @@
             </spacer>
            </item>
            <item>
-            <widget class="QLabel" name="label_9">
+            <widget class="QLabel" name="playerType">
              <property name="text">
               <string>选手人数:</string>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_10">
+            <widget class="QLabel" name="playerCount">
              <property name="text">
               <string>0</string>
              </property>
@@ -246,79 +246,25 @@
         <layout class="QVBoxLayout" name="verticalLayout">
          <item>
           <layout class="QFormLayout" name="formLayout">
-           <item row="0" column="0">
-            <widget class="QLabel" name="label_6">
-             <property name="text">
-              <string>比赛名称:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="0" column="1">
-            <widget class="QLineEdit" name="editTournamentName">
-             <property name="placeholderText">
-              <string>自动生成</string>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="0">
-            <spacer name="verticalSpacer">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="2" column="0">
             <widget class="QLabel" name="label_4">
              <property name="text">
               <string>选手ID:</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="1">
+           <item row="1" column="1">
             <widget class="QLineEdit" name="editPlayerID">
              <property name="text">
               <string>自动生成</string>
              </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <spacer name="verticalSpacer_2">
-             <property name="orientation">
-              <enum>Qt::Vertical</enum>
-             </property>
-             <property name="sizeHint" stdset="0">
-              <size>
-               <width>20</width>
-               <height>40</height>
-              </size>
-             </property>
-            </spacer>
-           </item>
-           <item row="4" column="0">
-            <widget class="QLabel" name="label">
-             <property name="text">
-              <string>比赛ID:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="4" column="1">
-            <widget class="QLineEdit" name="lineEdit">
              <property name="readOnly">
               <bool>true</bool>
              </property>
-             <property name="placeholderText">
-              <string>自动生成</string>
-             </property>
             </widget>
            </item>
-           <item row="5" column="0">
-            <spacer name="verticalSpacer_3">
+           <item row="2" column="0">
+            <spacer name="verticalSpacer_4">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -330,27 +276,17 @@
              </property>
             </spacer>
            </item>
-           <item row="6" column="0">
-            <widget class="QLabel" name="label_7">
-             <property name="text">
-              <string>比赛日期:</string>
-             </property>
-            </widget>
-           </item>
-           <item row="6" column="1">
-            <widget class="QDateEdit" name="editDate"/>
-           </item>
-           <item row="8" column="0">
+           <item row="3" column="0">
             <widget class="QLabel" name="label_2">
              <property name="text">
               <string>选手姓名:</string>
              </property>
             </widget>
            </item>
-           <item row="8" column="1">
+           <item row="3" column="1">
             <widget class="QLineEdit" name="editPlayerName"/>
            </item>
-           <item row="9" column="0">
+           <item row="4" column="0">
             <spacer name="verticalSpacer_5">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -363,14 +299,14 @@
              </property>
             </spacer>
            </item>
-           <item row="10" column="0">
+           <item row="5" column="0">
             <widget class="QLabel" name="label_3">
              <property name="text">
               <string>选手性别:</string>
              </property>
             </widget>
            </item>
-           <item row="10" column="1">
+           <item row="5" column="1">
             <widget class="QComboBox" name="editSex">
              <item>
               <property name="text">
@@ -384,7 +320,7 @@
              </item>
             </widget>
            </item>
-           <item row="11" column="0">
+           <item row="6" column="0">
             <spacer name="verticalSpacer_6">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -397,18 +333,18 @@
              </property>
             </spacer>
            </item>
-           <item row="12" column="0">
+           <item row="7" column="0">
             <widget class="QLabel" name="label_5">
              <property name="text">
               <string>电话号码:</string>
              </property>
             </widget>
            </item>
-           <item row="12" column="1">
+           <item row="7" column="1">
             <widget class="QLineEdit" name="lineEdit_4"/>
            </item>
-           <item row="7" column="0">
-            <spacer name="verticalSpacer_4">
+           <item row="8" column="0">
+            <spacer name="verticalSpacer_7">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>
@@ -420,8 +356,8 @@
              </property>
             </spacer>
            </item>
-           <item row="13" column="0">
-            <spacer name="verticalSpacer_7">
+           <item row="0" column="0">
+            <spacer name="verticalSpacer">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
              </property>

@@ -18,6 +18,7 @@ public:
     ~FixtureManager();
     void EliminationStart(QVector<Player*>& players,int level);
     void GroupStart(QVector<Player*>& players,int groupCount,int groupContain,int winSize);
+    Ui::FixtureManager *ui;
 
 signals:
     void gotoPlayerManager();
@@ -31,7 +32,6 @@ private slots:
 
 
 private:
-    Ui::FixtureManager *ui;
     EliminationTree *eTree;
     GroupList *gList;
 };

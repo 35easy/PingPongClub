@@ -1,6 +1,7 @@
 #include "groupnode.h"
 #include "ui_groupnode.h"
 
+#include <QPainter>
 #include <QTimeEdit>
 
 GroupNode::GroupNode(QWidget *parent) :
@@ -26,16 +27,21 @@ void GroupNode::addPlayer(Player *player)
 
 void GroupNode::initTableWidget()
 {
+    size=groupPlayers.size();
+
+
     // 创建表格
     ui->tableWidget->setRowCount(size);  // 设置行数
     ui->tableWidget->setColumnCount(size);  // 设置列数
+
+
     // 设置表格的固定大小
     int cellSize = 120;
     ui->tableWidget->horizontalHeader()->setDefaultSectionSize(cellSize);
     ui->tableWidget->verticalHeader()->setDefaultSectionSize(cellSize);
 
-    int tableWidth = size * cellSize+100;
-    int tableHeight = size * cellSize+100;
+    int tableWidth = size * cellSize+300;
+    int tableHeight = size * cellSize+300;
     this->setFixedSize(tableWidth,tableHeight);
 
     QTimeEdit* scoreEdit;
@@ -53,6 +59,7 @@ void GroupNode::initTableWidget()
             }
         }
     }
+
     // 设置表头
     QStringList headers;
 
@@ -62,7 +69,6 @@ void GroupNode::initTableWidget()
     //纵向和横向表头
     ui->tableWidget->setHorizontalHeaderLabels(headers);
     ui->tableWidget->setVerticalHeaderLabels(headers);
-
 
 }
 
@@ -98,8 +104,9 @@ void GroupNode::on_btAdvance_clicked()
        score=0;
        for (int j=0;j<size;j++) {
            if(i!=j){
-              scoreEdit= qobject_cast<QTimeEdit*>(ui->tableWidget->cellWidget(j,i));
+              scoreEdit= qobject_cast<QTimeEdit*>(ui->tableWidget->cellWidget(i,j));
               score+=scoreEdit->time().hour();
+              qDebug()<<scoreEdit->time();
            }
 
        }
@@ -154,4 +161,15 @@ void GroupNode::setPlayers(const QVector<Player *> &groupPlayers)
     //纵向和横向表头
     ui->tableWidget->setHorizontalHeaderLabels(headers);
     ui->tableWidget->setVerticalHeaderLabels(headers);
+}
+
+void  GroupNode::paintEvent(QPaintEvent *event)
+{
+
+       QPainter painter(this);  // 使用 this 作为绘图设备
+       painter.setPen(Qt::blue);
+
+
+       // 画斜对角线
+       painter.drawLine(ui->tableWidget->geometry().topLeft(), ui->tableWidget->geometry().bottomRight());
 }

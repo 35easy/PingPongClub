@@ -83,7 +83,7 @@ void FixtureManager::on_btYes_clicked()
 
         EliminationStart(arrange,level);
     }else{
-        int groupCount=4,groupContain=5,winSize=2;
+        int groupCount=ui->editGroupCount->text().toInt(),groupContain=4,winSize=ui->editWinSize->text().toInt();
         for(auto it:seeds){
             arrange.append(it);
         }

@@ -21,7 +21,7 @@ public:
     void initTableWidget();
     ~GroupNode();
     void setPlayers(const QVector<Player*> &groupPlayers);
-
+    void paintEvent(QPaintEvent *event) override;
     QVector<Player*> winners;
 
 private slots:

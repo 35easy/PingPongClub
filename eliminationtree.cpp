@@ -51,6 +51,9 @@ void EliminationTree::drawTree(QVector<Player*>& players)
     for(int i=0;i<players.size();i++){
         nodes.push_back(new EliminationNode(players[i],this));
     }
+
+
+
     //最外层数
     int outSum=size-end;
     qDebug()<<"outSum:"<<outSum;
@@ -86,7 +89,7 @@ void EliminationTree::drawTree(QVector<Player*>& players)
         else{
             y=nodes[i/2]->geometry().y()+h;
         }
-        qDebug()<<x<<"<<<"<<y;
+//        qDebug()<<x<<"<<<"<<y;
 
         nodes[i]->move(x,y);
     }

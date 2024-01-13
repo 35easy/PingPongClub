@@ -48,7 +48,7 @@ QTableView::item:selected {
 
 QHeaderView::section {
     background-color: #3498DB;
-    color: #FFFFFF;
+  /*  color: #FFFFFF;*/
     padding: 4px;
     border: 1px solid #2980B9;
 }
@@ -94,7 +94,7 @@ QTableView::item:focus {
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>909</width>
+          <width>915</width>
           <height>792</height>
          </rect>
         </property>

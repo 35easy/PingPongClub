@@ -45,7 +45,8 @@ void TournamentSystem::on_btSeedPlayer_clicked()
 
 void TournamentSystem::on_btFixture_clicked()
 {
-    qDebug()<<"导入";
+    fixtureManager->ui->playerSum->setText(QString::number(DataBase::getInstance().playerTabModel->rowCount()));
+    fixtureManager->ui->seedPlayerSum->setText(QString::number(DataBase::getInstance().seedTabModel->rowCount()));
     ui->tabWidget->setCurrentWidget(fixtureManager);
 }
 

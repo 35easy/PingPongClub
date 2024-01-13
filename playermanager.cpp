@@ -20,6 +20,7 @@ PlayerManager::PlayerManager(QWidget *parent)
 
 void PlayerManager::initDataBase()
 {
+
     DataBase &DataBase = DataBase::getInstance();
     if(DataBase.initModel(tableName)){
         model=DataBase.playerTabModel;
@@ -29,6 +30,8 @@ void PlayerManager::initDataBase()
     else{
         qDebug()<<"PlayerModel init failed";
     }
+    ui->playerCount->setText(QString::number(model->rowCount()));
+
 }
 
 void PlayerManager::on_btAddAPlayer_clicked()
@@ -99,6 +102,8 @@ void PlayerManager::on_btClearPlayer_clicked()
 {
 
     DataBase::getInstance().clearBySql(tableName);
+    if(tableName=="player")
+        initDataBase();
 }
 
 void PlayerManager::on_btPlayerOK_clicked()
